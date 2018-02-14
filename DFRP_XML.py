@@ -164,6 +164,7 @@ try:
                                'occupancy',
                                'createdDate',
                                'lastModifiedDate',
+                               'Custodian_code',
                                'Structure_Name',
                                'Address',
                                'Latitude',
@@ -280,7 +281,7 @@ try:
                 if Structures is not None:
                     for Structure in Structures.findall("Structure"):
                         # lookup table of unique custodian values
-                        check_add_custodian(Structure, custodian_codes, custodian_writer)
+                        code = check_add_custodian(Structure, custodian_codes, custodian_writer)
 
                         # optional elements
                         Address = optional_element_lookup(Structure, 'Address_E')
@@ -302,6 +303,7 @@ try:
                                                    Structure.get('occupancy'),
                                                    Structure.get('createdDate'),
                                                    Structure.get('lastModifiedDate'),
+                                                   code,
                                                    Structure.find('Structure_Name_E').text,
                                                    Address,
                                                    Latitude,
